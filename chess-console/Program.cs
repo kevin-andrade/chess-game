@@ -4,7 +4,11 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Test");
+            Position p;
+
+            p = new Position(3, 4);
+
+            Console.WriteLine("Position: " + p);
         }
     }
 }
