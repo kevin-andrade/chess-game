@@ -1,14 +1,14 @@
-﻿namespace chess_console
+﻿using board;
+
+namespace chess_console
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Position p;
+            Board board = new(8, 8);
 
-            p = new Position(3, 4);
-
-            Console.WriteLine("Position: " + p);
+            Screen.PrintTable(board);
         }
     }
 }
