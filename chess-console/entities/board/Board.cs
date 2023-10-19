@@ -24,6 +24,9 @@ namespace board {
         }
 
         public void AddPart(Piece p, Position pos) {
+            if (PieceExist(pos)) {
+                throw new BoardException("There is already a piece in this position!");
+            }
             Pieces[pos.Line, pos.Column] = p;
             p.Position = pos;
         }
