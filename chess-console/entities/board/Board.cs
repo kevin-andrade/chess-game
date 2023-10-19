@@ -13,5 +13,10 @@ namespace board {
         public Piece Piece(int line, int column) {
             return Pieces[line, column];
         }
+
+        public void AddPart(Piece p, Position pos) {
+            Pieces[pos.Line, pos.Column] = p;
+            p.Position = pos;
+        }
     }
 }

@@ -8,11 +8,11 @@ namespace board{
         public int QtyMovements { get; protected set; }
         public Board Board { get; protected set; }
 
-        public Piece(Position position, Color color, Board board) {
-            Position = position;
+        public Piece(Color color, Board board) {
+            Position = null;
             Color = color;
             Board = board;
+            QtyMovements = 0;
         }
-
     }
 }
