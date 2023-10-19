@@ -7,7 +7,7 @@ namespace chess {
         }
 
         public override string ToString() {
-            return "[K]";
+            return "K";
         }
     }
 }
