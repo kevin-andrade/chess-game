@@ -11,7 +11,19 @@ namespace chess_console
                 // Chessboard creation
                 ChessMatch match = new();
 
-                Screen.PrintTable(match.Board);
+                while (!match.Finished) {
+                    Console.Clear();
+                    Screen.PrintTable(match.Board);
+
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.Write("Origin: ");
+                    Position origin = Screen.ReadChessPosition().ToPosition();
+                    Console.Write("Destiny: ");
+                    Position destiny = Screen.ReadChessPosition().ToPosition();
+
+                    match.PerformMovement(origin, destiny);
+                }
             }
             catch (BoardException e) {
                 Console.WriteLine(e.Message);

@@ -1,16 +1,19 @@
 using chess_console;
 using board;
+using System.Reflection.Metadata;
 
 namespace chess {
     class ChessMatch {
         public Board Board { get; set; }
         private int Round;
         private Color CurrentPlayer;
+        public bool Finished { get; private set; }
 
         public ChessMatch(){
             Board = new Board(8, 8);
             Round = 1;
             CurrentPlayer = Color.White;
+            Finished = false;
             InsertParts();
         }
 
