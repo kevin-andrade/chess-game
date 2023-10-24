@@ -14,5 +14,9 @@ namespace board{
             Board = board;
             QtyMovements = 0;
         }
+
+        public void IncreaseQtyMovement() {
+            QtyMovements++;
+        }
     }
 }

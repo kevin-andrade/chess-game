@@ -9,16 +9,9 @@ namespace chess_console
         {
             try {
                 // Chessboard creation
-                Board board = new(8, 8);
+                ChessMatch match = new();
 
-                // Added parts
-                board.AddPart(new Tower(Color.Black, board), new Position(0, 0));
-                board.AddPart(new Tower(Color.Black, board), new Position(1, 3));
-                board.AddPart(new King(Color.Black, board), new Position(2, 4));
-                board.AddPart(new Tower(Color.White, board), new Position(3, 5));
-
-                // Console screen
-                Screen.PrintTable(board);
+                Screen.PrintTable(match.Board);
             }
             catch (BoardException e) {
                 Console.WriteLine(e.Message);
