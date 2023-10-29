@@ -2,7 +2,7 @@ using chess_console;
 
 namespace board{
 
-    class Piece {
+    abstract class Piece {
         public Position Position { get; set; }
         public Color Color { get; protected set; }
         public int QtyMovements { get; protected set; }
@@ -18,5 +18,7 @@ namespace board{
         public void IncreaseQtyMovement() {
             QtyMovements++;
         }
+
+        public abstract bool[,] PossibleMoves();
     }
 }
