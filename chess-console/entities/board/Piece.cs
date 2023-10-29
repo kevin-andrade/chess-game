@@ -19,6 +19,24 @@ namespace board{
             QtyMovements++;
         }
 
+        // When the part is blocked
+        public bool TruePossibleMovements() {
+            bool[,] mat = PossibleMoves();
+            for (int i=0; i<Board.Lines; i++) {
+                for (int j=0; j<Board.Columns; j++) {
+                    if (mat[i,j]) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CanMoveTo(Position pos) {
+            return PossibleMoves()[pos.Line, pos.Column];
+        }
+
+        // Movement of parts
         public abstract bool[,] PossibleMoves();
     }
 }
