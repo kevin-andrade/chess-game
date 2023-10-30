@@ -19,6 +19,10 @@ namespace board{
             QtyMovements++;
         }
 
+        public void DecreaseQtyMovement() {
+            QtyMovements--;
+        }
+
         // When the part is blocked
         public bool TruePossibleMovements() {
             bool[,] mat = PossibleMoves();
