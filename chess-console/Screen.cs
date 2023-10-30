@@ -3,6 +3,39 @@ using chess;
 
 namespace chess_console {
     class Screen {
+
+        public static void PrintMatch(ChessMatch match) {
+            PrintTable(match.Board);
+            Console.WriteLine();
+            Console.WriteLine();
+            PrintCapturedParts(match);
+            Console.WriteLine();
+            Console.WriteLine("Round: " + match.Round);
+            Console.WriteLine("Waiting for player move: " + match.CurrentPlayer);
+            Console.WriteLine();
+        }
+
+        public static void PrintCapturedParts(ChessMatch match) {
+            Console.WriteLine("Captured parts:");
+            Console.Write("White: ");
+            PrintSetOfParts(match.CapturedPieces(Color.White));
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            PrintSetOfParts(match.CapturedPieces(Color.Black));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+
+        public static void PrintSetOfParts(HashSet<Piece> set) {
+            Console.Write('[');
+            foreach (Piece x in set) {
+                Console.Write(x + ", ");
+            }
+            Console.Write(']');
+        }
+
         public static void PrintTable(Board board) {
             for (int i=0; i<board.Lines; i++) {
                 Console.Write(8 - i + " ");

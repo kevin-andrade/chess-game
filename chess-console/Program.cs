@@ -13,30 +13,25 @@ namespace chess_console
 
                 while (!match.Finished) {
                     try {
-                    Console.Clear();
-                    Screen.PrintTable(match.Board);
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.WriteLine("Round: " + match.Round);
-                    Console.WriteLine("Waiting for player move: " + match.CurrentPlayer);
+                        Console.Clear();
+                        Screen.PrintMatch(match);
 
-                    Console.WriteLine();
-                    Console.Write("Origin: ");
-                    Position origin = Screen.ReadChessPosition().ToPosition();
-                    match.ValidateOriginPosition(origin);
+                        Console.Write("Origin: ");
+                        Position origin = Screen.ReadChessPosition().ToPosition();
+                        match.ValidateOriginPosition(origin);
 
-                    bool[,] PiecePossibleMovement = match.Board.Piece(origin).PossibleMoves();
+                        bool[,] PiecePossibleMovement = match.Board.Piece(origin).PossibleMoves();
 
-                    Console.Clear();
-                    Screen.PrintTable(match.Board, PiecePossibleMovement);
+                        Console.Clear();
+                        Screen.PrintTable(match.Board, PiecePossibleMovement);
 
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.Write("Destiny: ");
-                    Position destiny = Screen.ReadChessPosition().ToPosition();
-                    match.ValidateDestinyPosition(origin, destiny);
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.Write("Destiny: ");
+                        Position destiny = Screen.ReadChessPosition().ToPosition();
+                        match.ValidateDestinyPosition(origin, destiny);
 
-                    match.MakePlay(origin, destiny);
+                        match.MakePlay(origin, destiny);
                     }
                     catch (BoardException e) {
                         Console.WriteLine(e.Message);
