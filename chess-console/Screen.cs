@@ -12,6 +12,9 @@ namespace chess_console {
             Console.WriteLine();
             Console.WriteLine("Round: " + match.Round);
             Console.WriteLine("Waiting for player move: " + match.CurrentPlayer);
+            if (match.Check) {
+                Console.WriteLine("You are in CHECK!");
+            }
             Console.WriteLine();
         }
 
