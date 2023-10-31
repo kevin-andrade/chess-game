@@ -11,11 +11,18 @@ namespace chess_console {
             PrintCapturedParts(match);
             Console.WriteLine();
             Console.WriteLine("Round: " + match.Round);
-            Console.WriteLine("Waiting for player move: " + match.CurrentPlayer);
-            if (match.Check) {
-                Console.WriteLine("You are in CHECK!");
+            if (!match.Finished) {
+                Console.WriteLine("Waiting for player move: " + match.CurrentPlayer);
+                if (match.Check) {
+                    Console.WriteLine("You are in CHECK!");
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
+            else {
+                Console.WriteLine();
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + match.CurrentPlayer);
+            }
         }
 
         public static void PrintCapturedParts(ChessMatch match) {

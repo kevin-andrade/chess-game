@@ -58,8 +58,13 @@ namespace chess {
                 Check = false;
             }
 
-            Round++;
-            ChangePlayer();
+            if (CheckmateTest(Adversary(CurrentPlayer))) {
+                Finished = true;
+            }
+            else {
+                Round++;
+                ChangePlayer();
+            }
         }
 
         private Color Adversary(Color color) {
@@ -94,6 +99,31 @@ namespace chess {
                 }
             }
             return false;
+        }
+
+        public bool CheckmateTest(Color color) {
+            if (!IsInCheck(color)) {
+                return false;
+            }
+
+            foreach (Piece x in PiecesInPlay(color)) {
+                bool[,] mat = x.PossibleMoves();
+                for (int i=0; i<Board.Lines; i++) {
+                    for (int j=0; j<Board.Columns; j++) {
+                        if (mat[i,j]) {
+                            Position origin = x.Position;
+                            Position destiny = new Position(i, j);
+                            Piece capturedPart = PerformMovement(origin, destiny);
+                            bool isInCheck = IsInCheck(color);
+                            UndoMovement(origin, destiny, capturedPart);
+                            if (!isInCheck) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public HashSet<Piece> CapturedPieces(Color color) {
