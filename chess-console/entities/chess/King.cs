@@ -61,7 +61,7 @@ namespace chess {
             }
 
             //NorthWest
-            pos.SetValues(Position.Line + 1, Position.Column -1);
+            pos.SetValues(Position.Line - 1, Position.Column -1);
             if (Board.ValidPosition(pos) && CanMove(pos)) {
                 mat[pos.Line, pos.Column] = true;
             }
