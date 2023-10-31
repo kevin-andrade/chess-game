@@ -22,6 +22,7 @@ namespace chess {
             Position pos = new Position(0,0);
 
             //Clockwise Direction
+
             //North
             pos.SetValues(Position.Line - 1, Position.Column);
             while (Board.ValidPosition(pos) && CanMove(pos)) {
@@ -32,14 +33,14 @@ namespace chess {
                 pos.Line--;
             }
 
-            //West
-            pos.SetValues(Position.Line, Position.Column -1);
+            //East
+            pos.SetValues(Position.Line, Position.Column + 1);
             while (Board.ValidPosition(pos) && CanMove(pos)) {
                 mat[pos.Line, pos.Column] = true;
                 if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) {
                     break;
                 }
-                pos.Column--;
+                pos.Column++;
             }
 
             //South
@@ -52,14 +53,14 @@ namespace chess {
                 pos.Line++;
             }
 
-            //East
-            pos.SetValues(Position.Line, Position.Column + 1);
+            //West
+            pos.SetValues(Position.Line, Position.Column -1);
             while (Board.ValidPosition(pos) && CanMove(pos)) {
                 mat[pos.Line, pos.Column] = true;
                 if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) {
                     break;
                 }
-                pos.Column++;
+                pos.Column--;
             }
             return mat;
         }
