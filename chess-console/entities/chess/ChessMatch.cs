@@ -180,19 +180,39 @@ namespace chess {
         }
 
         private void InsertParts() {
-            InsertNewPart('c', 1, new Tower(Color.White, Board));
-            InsertNewPart('c', 2, new Tower(Color.White, Board));
-            InsertNewPart('d', 2, new Tower(Color.White, Board));
-            InsertNewPart('e', 2, new Tower(Color.White, Board));
-            InsertNewPart('e', 1, new Tower(Color.White, Board));
-            InsertNewPart('d', 1, new King(Color.White, Board));
+            InsertNewPart('a', 1, new Tower(Color.White, Board));
+            InsertNewPart('b', 1, new Knight(Color.White, Board));
+            InsertNewPart('c', 1, new Bishop(Color.White, Board));
+            InsertNewPart('d', 1, new Queen(Color.White, Board));
+            InsertNewPart('e', 1, new King(Color.White, Board));
+            InsertNewPart('f', 1, new Bishop(Color.White, Board));
+            InsertNewPart('g', 1, new Knight(Color.White, Board));
+            InsertNewPart('h', 1, new Tower(Color.White, Board));
+            InsertNewPart('a', 2, new Pawn(Color.White, Board));
+            InsertNewPart('b', 2, new Pawn(Color.White, Board));
+            InsertNewPart('c', 2, new Pawn(Color.White, Board));
+            InsertNewPart('d', 2, new Pawn(Color.White, Board));
+            InsertNewPart('e', 2, new Pawn(Color.White, Board));
+            InsertNewPart('f', 2, new Pawn(Color.White, Board));
+            InsertNewPart('g', 2, new Pawn(Color.White, Board));
+            InsertNewPart('h', 2, new Pawn(Color.White, Board));
 
-            InsertNewPart('c', 7, new Tower(Color.Black, Board));
-            InsertNewPart('c', 8, new Tower(Color.Black, Board));
-            InsertNewPart('d', 7, new Tower(Color.Black, Board));
-            InsertNewPart('e', 7, new Tower(Color.Black, Board));
-            InsertNewPart('e', 8, new Tower(Color.Black, Board));
-            InsertNewPart('d', 8, new King(Color.Black, Board));
+            InsertNewPart('a', 8, new Tower(Color.White, Board));
+            InsertNewPart('b', 8, new Knight(Color.White, Board));
+            InsertNewPart('c', 8, new Bishop(Color.White, Board));
+            InsertNewPart('d', 8, new Queen(Color.White, Board));
+            InsertNewPart('e', 8, new King(Color.White, Board));
+            InsertNewPart('f', 8, new Bishop(Color.White, Board));
+            InsertNewPart('g', 8, new Knight(Color.White, Board));
+            InsertNewPart('h', 8, new Tower(Color.White, Board));
+            InsertNewPart('a', 7, new Pawn(Color.White, Board));
+            InsertNewPart('b', 7, new Pawn(Color.White, Board));
+            InsertNewPart('c', 7, new Pawn(Color.White, Board));
+            InsertNewPart('d', 7, new Pawn(Color.White, Board));
+            InsertNewPart('e', 7, new Pawn(Color.White, Board));
+            InsertNewPart('f', 7, new Pawn(Color.White, Board));
+            InsertNewPart('g', 7, new Pawn(Color.White, Board));
+            InsertNewPart('h', 7, new Pawn(Color.White, Board));
         }
     }
 }

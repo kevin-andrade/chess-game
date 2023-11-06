@@ -21,12 +21,12 @@ namespace chess_console {
 
             if (Color == Color.White) {
                 //Up
-                pos.SetValues(Position.Line - 2, Position.Column);
-                if (Board.ValidPosition(pos) && FreePosition(pos) && QtyMovements == 0) {
-                    mat[pos.Line, pos.Column] = true;
-                }
                 pos.SetValues(Position.Line - 1, Position.Column);
                 if (Board.ValidPosition(pos) && FreePosition(pos)) {
+                    mat[pos.Line, pos.Column] = true;
+                }
+                pos.SetValues(Position.Line - 2, Position.Column);
+                if (Board.ValidPosition(pos) && FreePosition(pos) && QtyMovements == 0) {
                     mat[pos.Line, pos.Column] = true;
                 }
                 pos.SetValues(Position.Line - 1, Position.Column + 1);
@@ -40,12 +40,12 @@ namespace chess_console {
             }
             else {
                 //Down
-                pos.SetValues(Position.Line + 2, Position.Column);
-                if (Board.ValidPosition(pos) && FreePosition(pos) && QtyMovements == 0) {
-                    mat[pos.Line, pos.Column] = true;
-                }
                 pos.SetValues(Position.Line + 1, Position.Column);
                 if (Board.ValidPosition(pos) && FreePosition(pos)) {
+                    mat[pos.Line, pos.Column] = true;
+                }
+                pos.SetValues(Position.Line + 2, Position.Column);
+                if (Board.ValidPosition(pos) && FreePosition(pos) && QtyMovements == 0) {
                     mat[pos.Line, pos.Column] = true;
                 }
                 pos.SetValues(Position.Line + 1, Position.Column + 1);
