@@ -7,7 +7,7 @@ namespace chess_console {
 
         private bool HasAnEnemy(Position pos) {
             Piece p = Board.Piece(pos);
-            return p == null || p.Color != Color;
+            return p != null && p.Color != Color;
         }
 
         private bool FreePosition(Position pos) {
@@ -65,7 +65,4 @@ namespace chess_console {
             return "P";
         }
     }
-    }
-
-
-
+}
