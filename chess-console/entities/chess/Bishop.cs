@@ -27,7 +27,7 @@ namespace chess {
                 if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) {
                     break;
                 }
-                pos.SetValues(Position.Line - 1, Position.Column + 1);
+                pos.SetValues(pos.Line - 1, pos.Column + 1);
             }
 
             //SouthEast
@@ -37,7 +37,7 @@ namespace chess {
                 if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) {
                     break;
                 }
-                pos.SetValues(Position.Line + 1, Position.Column + 1);
+                pos.SetValues(pos.Line + 1, pos.Column + 1);
             }
 
             //SouthWest
@@ -47,7 +47,7 @@ namespace chess {
                 if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) {
                     break;
                 }
-                pos.SetValues(Position.Line + 1, Position.Column - 1);
+                pos.SetValues(pos.Line + 1, pos.Column - 1);
             }
 
             //Northwest
@@ -57,7 +57,7 @@ namespace chess {
                 if (Board.Piece(pos) != null && Board.Piece(pos).Color != Color) {
                     break;
                 }
-                pos.SetValues(Position.Line - 1, Position.Column -1);
+                pos.SetValues(pos.Line - 1, pos.Column -1);
             }
             return mat;
         }
