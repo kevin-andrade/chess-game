@@ -30,6 +30,26 @@ namespace chess {
             if (capturedPart != null) {
                 CapturedParts.Add(capturedPart);
             }
+
+            // Special castling move
+            if (p is King && destiny.Column == origin.Column + 2) {
+                // #Castle kingside
+                Position originTower = new(origin.Line, origin.Column + 3);
+                Position destinyTower = new(origin.Line, origin.Column + 1);
+                Piece T = Board.RemovePart(originTower);
+                T.IncreaseQtyMovement();
+                Board.AddPart(T, destinyTower);
+            }
+
+            if (p is King && destiny.Column == origin.Column - 2) {
+                // #Castle queenside
+                Position originTower = new(origin.Line, origin.Column - 4);
+                Position destinyTower = new(origin.Line, origin.Column - 1);
+                Piece T = Board.RemovePart(originTower);
+                T.IncreaseQtyMovement();
+                Board.AddPart(T, destinyTower);
+            }
+
             return capturedPart;
         }
 
@@ -41,6 +61,25 @@ namespace chess {
                 CapturedParts.Remove(capturedPart);
             }
             Board.AddPart(p, origin);
+
+            // Special castling move
+            if (p is King && destiny.Column == origin.Column + 2) {
+                // #Castle kingside
+                Position originTower = new(origin.Line, origin.Column + 3);
+                Position destinyTower = new(origin.Line, origin.Column + 1);
+                Piece T = Board.RemovePart(destinyTower);
+                T.DecreaseQtyMovement();
+                Board.AddPart(T, originTower);
+            }
+
+            if (p is King && destiny.Column == origin.Column - 2) {
+                // #Castle queenside
+                Position originTower = new(origin.Line, origin.Column - 4);
+                Position destinyTower = new(origin.Line, origin.Column - 1);
+                Piece T = Board.RemovePart(destinyTower);
+                T.DecreaseQtyMovement();
+                Board.AddPart(T, originTower);
+            }
         }
 
         public void MakePlay(Position origin, Position destiny) {
@@ -69,12 +108,11 @@ namespace chess {
 
         private Color Adversary(Color color) {
             if (color == Color.White) {
-                color = Color.Black;
+                return Color.Black;
             }
             else {
-                color = Color.White;
+                return Color.White;
             }
-            return color;
         }
 
         //Get king piece that color
@@ -184,7 +222,7 @@ namespace chess {
             InsertNewPart('b', 1, new Knight(Color.White, Board));
             InsertNewPart('c', 1, new Bishop(Color.White, Board));
             InsertNewPart('d', 1, new Queen(Color.White, Board));
-            InsertNewPart('e', 1, new King(Color.White, Board));
+            InsertNewPart('e', 1, new King(Color.White, Board, this));
             InsertNewPart('f', 1, new Bishop(Color.White, Board));
             InsertNewPart('g', 1, new Knight(Color.White, Board));
             InsertNewPart('h', 1, new Tower(Color.White, Board));
@@ -201,7 +239,7 @@ namespace chess {
             InsertNewPart('b', 8, new Knight(Color.Black, Board));
             InsertNewPart('c', 8, new Bishop(Color.Black, Board));
             InsertNewPart('d', 8, new Queen(Color.Black, Board));
-            InsertNewPart('e', 8, new King(Color.Black, Board));
+            InsertNewPart('e', 8, new King(Color.Black, Board, this));
             InsertNewPart('f', 8, new Bishop(Color.Black, Board));
             InsertNewPart('g', 8, new Knight(Color.Black, Board));
             InsertNewPart('h', 8, new Tower(Color.Black, Board));
