@@ -122,6 +122,19 @@ namespace chess {
                 throw new BoardException("you can't put yourself in check!");
             }
 
+            Piece p = Board.Piece(destiny);
+
+            // Promotion play
+            if (p is Pawn) {
+                if ((p.Color == Color.White && destiny.Line == 0) || (p.Color == Color.Black && destiny.Line == 7)) {
+                    p = Board.RemovePart(destiny);
+                    Pieces.Remove(p);
+                    Piece queen = new Queen(p.Color, Board);
+                    Board.AddPart(queen, destiny);
+                    Pieces.Add(queen);
+                }
+            }
+
             if (IsInCheck(Adversary(CurrentPlayer))) {
                 Check = true;
             }
@@ -136,8 +149,6 @@ namespace chess {
                 Round++;
                 ChangePlayer();
             }
-
-            Piece p = Board.Piece(destiny);
 
             // En Passant play
             if (p is Pawn && (destiny.Line == origin.Line - 2 || destiny.Line == origin.Line + 2)) {
