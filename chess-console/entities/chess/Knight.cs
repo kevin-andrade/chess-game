@@ -45,7 +45,7 @@ namespace chess {
             if (Board.ValidPosition(pos) && CanMove(pos)) {
                 mat[pos.Line, pos.Column] = true;
             }
-            pos.SetValues(Position.Line + 2, Position.Column - 1);
+            pos.SetValues(Position.Line - 2, Position.Column - 1);
             if (Board.ValidPosition(pos) && CanMove(pos)) {
                 mat[pos.Line, pos.Column] = true;
             }
