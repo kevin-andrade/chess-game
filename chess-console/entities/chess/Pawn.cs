@@ -1,8 +1,11 @@
 using board;
+using chess;
 
 namespace chess_console {
     class Pawn : Piece{
-        public Pawn(Color color, Board board) : base(color, board) {
+        private ChessMatch Game;
+        public Pawn(Color color, Board board,ChessMatch game) : base(color, board) {
+            Game = game;
         }
 
         private bool HasAnEnemy(Position pos) {
@@ -37,8 +40,21 @@ namespace chess_console {
                 if (Board.ValidPosition(pos) && HasAnEnemy(pos)) {
                     mat[pos.Line, pos.Column] = true;
                 }
+
+                // En Passant
+                if (Position.Line == 3) {
+                    Position left = new(Position.Line, Position.Column -1);
+                    if (Board.ValidPosition(left) && HasAnEnemy(left) && Board.Piece(left) == Game.VulnerableToEnPassant) {
+                        mat[left.Line - 1, left.Column] = true;
+                    }
+                    Position right = new(Position.Line, Position.Column + 1);
+                    if (Board.ValidPosition(right) && HasAnEnemy(right) && Board.Piece(right) == Game.VulnerableToEnPassant) {
+                        mat[right.Line - 1, right.Column] = true;
+                    }
+                }
             }
             else {
+                //Black parts
                 //Down
                 pos.SetValues(Position.Line + 1, Position.Column);
                 if (Board.ValidPosition(pos) && FreePosition(pos)) {
@@ -55,6 +71,18 @@ namespace chess_console {
                 pos.SetValues(Position.Line + 1, Position.Column - 1);
                 if (Board.ValidPosition(pos) && HasAnEnemy(pos)) {
                     mat[pos.Line, pos.Column] = true;
+                }
+
+                // En Passant
+                if (Position.Line == 4) {
+                    Position left = new(Position.Line, Position.Column -1);
+                    if (Board.ValidPosition(left) && HasAnEnemy(left) && Board.Piece(left) == Game.VulnerableToEnPassant) {
+                        mat[left.Line + 1, left.Column] = true;
+                    }
+                    Position right = new(Position.Line, Position.Column + 1);
+                    if (Board.ValidPosition(right) && HasAnEnemy(right) && Board.Piece(right) == Game.VulnerableToEnPassant) {
+                        mat[right.Line + 1, right.Column] = true;
+                    }
                 }
             }
 

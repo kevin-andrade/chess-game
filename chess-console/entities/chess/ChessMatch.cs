@@ -10,6 +10,7 @@ namespace chess {
         private HashSet<Piece> Pieces;
         private HashSet<Piece> CapturedParts;
         public bool Check { get; private set; }
+        public Piece VulnerableToEnPassant { get; private set; }
 
         public ChessMatch(){
             Board = new Board(8, 8);
@@ -17,6 +18,7 @@ namespace chess {
             CurrentPlayer = Color.White;
             Finished = false;
             Check = false;
+            VulnerableToEnPassant = null;
             Pieces = new HashSet<Piece>();
             CapturedParts = new HashSet<Piece>();
             InsertParts();
@@ -50,6 +52,21 @@ namespace chess {
                 Board.AddPart(T, destinyTower);
             }
 
+            // En Passant
+            if (p is Pawn) {
+                if (origin.Column != destiny.Column && capturedPart == null) {
+                    Position posPawn;
+                    if (p.Color == Color.White) {
+                        posPawn = new(destiny.Line + 1, destiny.Column);
+                    }
+                    else {
+                        posPawn = new(destiny.Line - 1, destiny.Column);
+                    }
+                    capturedPart = Board.RemovePart(posPawn);
+                    CapturedParts.Add(capturedPart);
+                }
+            }
+
             return capturedPart;
         }
 
@@ -80,6 +97,21 @@ namespace chess {
                 T.DecreaseQtyMovement();
                 Board.AddPart(T, originTower);
             }
+
+            // En Passant
+            if (p is Pawn) {
+                if (origin.Column != destiny.Column && capturedPart == VulnerableToEnPassant) {
+                    Piece pawn = Board.RemovePart(destiny);
+                    Position posPawn;
+                    if (p.Color == Color.White) {
+                        posPawn = new(3, destiny.Column);
+                    }
+                    else {
+                        posPawn = new(4, destiny.Column);
+                    }
+                    Board.AddPart(pawn, posPawn);
+                }
+            }
         }
 
         public void MakePlay(Position origin, Position destiny) {
@@ -103,6 +135,16 @@ namespace chess {
             else {
                 Round++;
                 ChangePlayer();
+            }
+
+            Piece p = Board.Piece(destiny);
+
+            // En Passant play
+            if (p is Pawn && (destiny.Line == origin.Line - 2 || destiny.Line == origin.Line + 2)) {
+                VulnerableToEnPassant = p;
+            }
+            else {
+                VulnerableToEnPassant = null;
             }
         }
 
@@ -226,14 +268,14 @@ namespace chess {
             InsertNewPart('f', 1, new Bishop(Color.White, Board));
             InsertNewPart('g', 1, new Knight(Color.White, Board));
             InsertNewPart('h', 1, new Tower(Color.White, Board));
-            InsertNewPart('a', 2, new Pawn(Color.White, Board));
-            InsertNewPart('b', 2, new Pawn(Color.White, Board));
-            InsertNewPart('c', 2, new Pawn(Color.White, Board));
-            InsertNewPart('d', 2, new Pawn(Color.White, Board));
-            InsertNewPart('e', 2, new Pawn(Color.White, Board));
-            InsertNewPart('f', 2, new Pawn(Color.White, Board));
-            InsertNewPart('g', 2, new Pawn(Color.White, Board));
-            InsertNewPart('h', 2, new Pawn(Color.White, Board));
+            InsertNewPart('b', 2, new Pawn(Color.White, Board, this));
+            InsertNewPart('c', 2, new Pawn(Color.White, Board, this));
+            InsertNewPart('d', 2, new Pawn(Color.White, Board, this));
+            InsertNewPart('e', 2, new Pawn(Color.White, Board, this));
+            InsertNewPart('a', 2, new Pawn(Color.White, Board, this));
+            InsertNewPart('f', 2, new Pawn(Color.White, Board, this));
+            InsertNewPart('g', 2, new Pawn(Color.White, Board, this));
+            InsertNewPart('h', 2, new Pawn(Color.White, Board, this));
 
             InsertNewPart('a', 8, new Tower(Color.Black, Board));
             InsertNewPart('b', 8, new Knight(Color.Black, Board));
@@ -243,14 +285,14 @@ namespace chess {
             InsertNewPart('f', 8, new Bishop(Color.Black, Board));
             InsertNewPart('g', 8, new Knight(Color.Black, Board));
             InsertNewPart('h', 8, new Tower(Color.Black, Board));
-            InsertNewPart('a', 7, new Pawn(Color.Black, Board));
-            InsertNewPart('b', 7, new Pawn(Color.Black, Board));
-            InsertNewPart('c', 7, new Pawn(Color.Black, Board));
-            InsertNewPart('d', 7, new Pawn(Color.Black, Board));
-            InsertNewPart('e', 7, new Pawn(Color.Black, Board));
-            InsertNewPart('f', 7, new Pawn(Color.Black, Board));
-            InsertNewPart('g', 7, new Pawn(Color.Black, Board));
-            InsertNewPart('h', 7, new Pawn(Color.Black, Board));
+            InsertNewPart('a', 7, new Pawn(Color.Black, Board, this));
+            InsertNewPart('b', 7, new Pawn(Color.Black, Board, this));
+            InsertNewPart('c', 7, new Pawn(Color.Black, Board, this));
+            InsertNewPart('d', 7, new Pawn(Color.Black, Board, this));
+            InsertNewPart('e', 7, new Pawn(Color.Black, Board, this));
+            InsertNewPart('f', 7, new Pawn(Color.Black, Board, this));
+            InsertNewPart('g', 7, new Pawn(Color.Black, Board, this));
+            InsertNewPart('h', 7, new Pawn(Color.Black, Board, this));
         }
     }
 }
